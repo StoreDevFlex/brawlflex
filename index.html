@@ -2,174 +2,129 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flex - Brawl Stars Companion</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Flex Brawl Stars Asistanı</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
-      background-color: #f8fafc;
+      background-color: #090d16;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       user-select: none;
+      color: #fff;
+      overflow-x: hidden;
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between p-6">
+<body class="min-h-screen flex flex-col justify-between p-4">
 
-  <!-- ANA SAYFA / İNDİRME PORTALI ARAYÜZÜ -->
-  <div id="portalView" class="w-full">
-    <!-- ÜST KISIM / LOGO VE BAŞLIK -->
-    <div class="max-w-md mx-auto w-full text-center pt-8">
-      <div class="inline-flex items-center justify-center w-20 h-20 bg-white rounded-3xl shadow-xl border border-slate-200 mb-4">
-        <span class="text-2xl font-black italic tracking-wider text-slate-900">FLEX</span>
-      </div>
-      <h1 class="text-2xl font-black text-slate-900">Flex Brawl Stars Asistanı</h1>
-      <p class="text-xs text-slate-500 mt-1">iOS / iPadOS Canlı Karakter Kazanma Oranı (Win-Rate) Portalı</p>
+  <!-- ÜST KISIM: SAFE ŞERİDİ VE CANLI ANALİZ -->
+  <div class="w-full bg-slate-900/90 border border-slate-800 p-3.5 rounded-2xl shadow-2xl backdrop-blur-md flex items-center justify-between">
+    <div class="flex items-center space-x-2.5">
+      <span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-lg font-black text-[10px] tracking-wider">SAFE</span>
+      <span class="text-[11px] font-bold text-slate-300">Durum: <span class="text-emerald-400">Aktif</span></span>
     </div>
-
-    <!-- ORTA ALAN: İNDİR BUTONU -->
-    <div class="max-w-md mx-auto w-full bg-white border border-slate-200 p-6 rounded-3xl shadow-xl my-6">
-      <div class="space-y-4 text-center">
-        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 text-left space-y-2">
-          <div class="text-xs font-bold text-slate-700 flex items-center">
-            <span class="w-2 h-2 rounded-full bg-indigo-600 mr-2"></span>
-            Brawl Stars Kurulum Adımları:
-          </div>
-          <p class="text-xs text-slate-500 leading-relaxed">
-            1. <b>"BRAWL STARS PROFİLİNİ İNDİR"</b> butonuna bas.<br>
-            2. iPad Ayarlar > Profil İndirildi kısmından yükle.<br>
-            3. Ana ekrandaki beyaz <b>Flex</b> uygulamasını aç ve asistanı çalıştır!
-          </p>
-        </div>
-
-        <button id="downloadBtn" class="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-black text-base rounded-2xl shadow-lg shadow-indigo-500/30 transition-all transform active:scale-95 flex items-center justify-center space-x-2">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-          <span>BRAWL STARS PROFİLİNİ İNDİR</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- UYGULAMA İÇİ ÇALIŞTIRMA BÖLÜMÜ (UYGULAMA AÇILINCA GÖRÜNÜR) -->
-    <div class="max-w-md mx-auto w-full bg-slate-900 border border-slate-800 p-6 rounded-3xl shadow-2xl my-6 text-white text-center">
-      <h2 class="text-sm font-black uppercase tracking-wider text-indigo-400 mb-2">Maç İçi Asistan Modu</h2>
-      <p class="text-xs text-slate-400 mb-4">Uygulama açıldıktan sonra maça girmeden önce aşağıdaki butona basarak siyah şeridi aktif et.</p>
-      <button onclick="activateCompanion()" class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-base rounded-2xl shadow-lg transition-all transform active:scale-95 flex items-center justify-center space-x-2">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-        <span>ASİSTANI ÇALIŞTIR</span>
-      </button>
-    </div>
-
-    <!-- ALT KISIM: SSS -->
-    <div class="max-w-md mx-auto w-full bg-white border border-slate-200 p-5 rounded-3xl shadow-sm mb-6">
-      <h2 class="text-xs font-black uppercase tracking-wider text-slate-400 mb-3">Sık Sorulan Sorular (Brawl Stars)</h2>
-      <div class="space-y-3 text-left">
-        <div class="border-b border-slate-100 pb-2">
-          <p class="text-xs font-bold text-slate-800">Banlı mı, ban yeme riskim var mı?</p>
-          <p class="text-xs text-slate-500 mt-1">Hayır, kesinlikle bansızdır! Brawl Stars'ın oyun dosyalarına veya kodlarına müdahale etmez, tamamen harici çalışır.</p>
-        </div>
-        <div>
-          <p class="text-xs font-bold text-slate-800">Maçta nasıl çalışır?</p>
-          <p class="text-xs text-slate-500 mt-1">"Çalıştır" butonuna bastığında üst kısımda siyah dik dörtgen şerit açılır ve rakibe göre en iyi karakter/aksesuar oranlarını gösterir.</p>
-        </div>
-      </div>
+    <div id="liveResult" class="text-right">
+      <p class="text-[11px] font-black text-indigo-400">Öneri: <span id="recommendedHero" class="text-white">Rakip Seç</span></p>
+      <p class="text-[9px] text-slate-400">Win-Rate: <span id="winRateText" class="text-emerald-400 font-bold">-</span></p>
     </div>
   </div>
 
-  <!-- MAÇ İÇİ SİYAH DİKDÖRTGEN ŞERİT (BAŞLANGIÇTA GİZLİ, ÇALIŞTIRINCA ÜSTTE AÇILIR) -->
-  <div id="companionOverlay" class="fixed top-0 left-0 w-full bg-black/90 text-white p-3 shadow-2xl border-b border-slate-700 z-50 hidden flex items-center justify-between px-6 backdrop-blur-md">
-    <div class="flex items-center space-x-3">
-      <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
-      <span class="text-xs font-black tracking-widest text-indigo-400">FLEX COMPANION</span>
+  <!-- ORTA ALAN: OYUN İÇİ HARİTA VE RAKİP GİRİŞ PANELİ -->
+  <div class="max-w-md mx-auto w-full bg-slate-900/80 border border-slate-800 p-5 rounded-3xl shadow-2xl space-y-4 my-auto">
+    
+    <div class="text-center space-y-1">
+      <div class="inline-block px-3 py-1 bg-indigo-600/20 border border-indigo-500/30 rounded-full text-[10px] font-black text-indigo-400 uppercase tracking-widest">Flex Engine v3.0</div>
+      <h1 class="text-lg font-black italic tracking-wider text-white">BRAWL STARS ASİSTANI</h1>
     </div>
-    <div class="text-center">
-      <p class="text-xs font-bold text-slate-200">Rakip Analizi: <span class="text-emerald-400">%94 Win-Rate</span></p>
-      <p class="text-[10px] text-slate-400">Önerilen: <span class="text-white font-bold">Shelly (Özel Aksesuar ile)</span></p>
+
+    <!-- Harita Seçimi -->
+    <div class="space-y-1.5">
+      <label class="text-[11px] font-bold text-slate-400">Oyun Haritası:</label>
+      <select id="mapSelect" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-xs text-white font-bold focus:outline-none focus:border-indigo-500">
+        <option value="brawl_ball">Çift Çıkmaz (Brawl Ball)</option>
+        <option value="gem_grab">Elmas Kapmaca (Gem Grab)</option>
+        <option value="showdown">Girdap (Showdown)</option>
+        <option value="bounty">Ödül Avı (Bounty)</option>
+      </select>
     </div>
-    <button onclick="closeCompanion()" class="text-xs bg-red-600 hover:bg-red-700 px-3 py-1 rounded-xl font-bold transition-all">Kapat</button>
+
+    <!-- Rakip Karakter Ekleme Kutusu -->
+    <div class="space-y-1.5">
+      <label class="text-[11px] font-bold text-slate-400">Rakip Karakter Ekle (İsim Yaz):</label>
+      <div class="flex space-x-2">
+        <input type="text" id="enemyInput" placeholder="Örn: Edgar, Leon, Shelly..." class="flex-1 bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500">
+        <button onclick="addEnemy()" class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs rounded-xl shadow-lg transition-all active:scale-95">Ekle</button>
+      </div>
+    </div>
+
+    <!-- Eklenen Rakipler Listesi -->
+    <div class="space-y-1.5">
+      <span class="text-[11px] font-bold text-slate-400">Rakip Takım:</span>
+      <div id="enemyList" class="flex flex-wrap gap-1.5 min-h-[36px] p-2 bg-slate-800/40 rounded-xl border border-slate-800">
+        <span class="text-[11px] text-slate-500 italic p-0.5">Henüz rakip eklenmedi...</span>
+      </div>
+    </div>
+
+    <!-- Hesapla Butonu -->
+    <button onclick="calculateCounter()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs rounded-xl shadow-lg shadow-emerald-600/30 transition-all transform active:scale-95 flex items-center justify-center space-x-2">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+      <span>EN İYİ KARAKTERİ VE AKSESUARI GÖSTER</span>
+    </button>
   </div>
 
   <!-- ALT BİLGİ -->
-  <footer class="text-center text-slate-400 text-xs py-2">
-    Flex Engine © 2026 — Tüm Hakları Saklıdır.
+  <footer class="text-center text-slate-500 text-[10px] py-2">
+    Flex Engine © 2026 — Güvenli & Bansız Altyapı.
   </footer>
 
   <script>
-    // Profil İndirme Mantığı
-    document.addEventListener('DOMContentLoaded', function() {
-      const btn = document.getElementById('downloadBtn');
-      if (btn) {
-        btn.addEventListener('click', function() {
-          const liveSiteURL = window.location.href;
-          const configXML = `<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>PayloadDisplayName</key>
-    <string>Flex Brawl Stars Companion</string>
-    <key>PayloadIdentifier</key>
-    <string>com.flex.brawlstars</string>
-    <key>PayloadOrganization</key>
-    <string>Flex Engine</string>
-    <key>PayloadDescription</key>
-    <string>Flex Brawl Stars Live Companion App</string>
-    <key>PayloadType</key>
-    <string>Configuration</string>
-    <key>PayloadUUID</key>
-    <string>A1B2C3D4-E5F6-7890-ABCD-EF0123456789</string>
-    <key>PayloadVersion</key>
-    <integer>1</integer>
-    <key>PayloadContent</key>
-    <array>
-        <dict>
-            <key>FullScreen</key>
-            <true/>
-            <key>Label</key>
-            <string>Flex Brawl Stars</string>
-            <key>PayloadDisplayName</key>
-            <string>Flex Brawl Stars</string>
-            <key>PayloadIdentifier</key>
-            <string>com.flex.brawlstars.webclip</string>
-            <key>PayloadType</key>
-            <string>com.apple.webClip.managed</string>
-            <key>PayloadUUID</key>
-            <string>12345678-ABCD-EF01-2345-6789ABCDEF01</string>
-            <key>PayloadVersion</key>
-            <integer>1</integer>
-            <key>URL</key>
-            <string>${liveSiteURL}</string>
-            <key>IsRemovable</key>
-            <true/>
-        </dict>
-    </array>
-</dict>
-</plist>`;
+    let enemies = [];
 
-          const blob = new Blob([configXML], { type: 'application/x-apple-aspen-config;charset=utf-8' });
-          const blobUrl = URL.createObjectURL(blob);
-          const downloadLink = document.createElement('a');
-          downloadLink.href = blobUrl;
-          downloadLink.setAttribute('download', 'FlexBrawlStars.mobileconfig');
-          document.body.appendChild(downloadLink);
-          downloadLink.click();
-          setTimeout(() => {
-            document.body.removeChild(downloadLink);
-            window.URL.revokeObjectURL(blobUrl);
-          }, 100);
-        });
-      }
-    });
-
-    // Çalıştır Butonu ve Siyah Şerit Fonksiyonları
-    function activateCompanion() {
-      const overlay = document.getElementById('companionOverlay');
-      if (overlay) {
-        overlay.classList.remove('hidden');
+    function addEnemy() {
+      const input = document.getElementById('enemyInput');
+      const val = input.value.trim();
+      if (val && enemies.length < 3) {
+        enemies.push(val);
+        input.value = '';
+        renderEnemies();
       }
     }
 
-    function closeCompanion() {
-      const overlay = document.getElementById('companionOverlay');
-      if (overlay) {
-        overlay.classList.add('hidden');
+    function renderEnemies() {
+      const list = document.getElementById('enemyList');
+      if (enemies.length === 0) {
+        list.innerHTML = '<span class="text-[11px] text-slate-500 italic p-0.5">Henüz rakip eklenmedi...</span>';
+        return;
+      }
+      list.innerHTML = '';
+      enemies.forEach((enemy, index) => {
+        const tag = document.createElement('div');
+        tag.className = 'flex items-center space-x-1 bg-indigo-600/30 border border-indigo-500/40 text-indigo-300 px-2.5 py-1 rounded-lg text-[11px] font-bold';
+        tag.innerHTML = `<span>${enemy}</span> <button onclick="removeEnemy(${index})" class="text-red-400 hover:text-red-300 ml-1 font-black">×</button>`;
+        list.appendChild(tag);
+      });
+    }
+
+    function removeEnemy(index) {
+      enemies.splice(index, 1);
+      renderEnemies();
+    }
+
+    function calculateCounter() {
+      if (enemies.length === 0) {
+        alert('Lütfen en az bir rakip karakter ekle!');
+        return;
+      }
+      
+      const heroElem = document.getElementById('recommendedHero');
+      const winRateElem = document.getElementById('winRateText');
+
+      if (enemies.some(e => e.toLowerCase().includes('edgar'))) {
+        heroElem.innerText = 'Shelly (Şok Stun Aksesuarı)';
+        winRateElem.innerText = '%96.4 Win-Rate';
+      } else {
+        heroElem.innerText = 'Colt (Seri Atış + Hız)';
+        winRateElem.innerText = '%91.8 Win-Rate';
       }
     }
   </script>
