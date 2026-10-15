@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Flex - Brawl Stars Companion</title>
+  <title>Flex Brawl Stars</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
@@ -16,7 +16,7 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between p-4">
 
-  <!-- 1. BÖLÜM: ÜST SAFE ŞERİDİ (Uygulama açılınca en üstte direkt görünür) -->
+  <!-- EN ÜSTTEKİ SİYAH SAFE ŞERİDİ -->
   <div class="w-full bg-slate-900/90 border border-slate-800 p-3.5 rounded-2xl shadow-2xl backdrop-blur-md flex items-center justify-between mb-4">
     <div class="flex items-center space-x-2.5">
       <span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-lg font-black text-[10px] tracking-wider">SAFE</span>
@@ -28,7 +28,7 @@
     </div>
   </div>
 
-  <!-- 2. BÖLÜM: ORTA KISIM (Harita ve Rakip Yazma Paneli) -->
+  <!-- UYGULAMA İÇİ HARİTA VE RAKİP SEÇİM PANELİ -->
   <div class="max-w-md mx-auto w-full bg-slate-900/80 border border-slate-800 p-5 rounded-3xl shadow-2xl space-y-4 my-auto">
     
     <div class="text-center space-y-1">
@@ -71,15 +71,14 @@
     </button>
   </div>
 
-  <!-- 3. BÖLÜM: PROFİL İNDİR BUTONU (Sitede görünür) -->
+  <!-- PROFİL İNDİRME BUTONU -->
   <div class="max-w-md mx-auto w-full bg-slate-900 border border-slate-800 p-4 rounded-2xl shadow-xl mt-4 text-center">
-    <p class="text-[11px] text-slate-400 mb-2">Uygulamayı ana ekrana sabitlemek için:</p>
+    <p class="text-[11px] text-slate-400 mb-2">Simge ve Profil Güncellemesi İçin:</p>
     <button id="downloadBtn" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs rounded-xl shadow-lg transition-all active:scale-95">
-      PROFİLİ İNDİR (.mobileconfig)
+      GÜNCEL PROFİLİ İNDİR (.mobileconfig)
     </button>
   </div>
 
-  <!-- ALT BİLGİ -->
   <footer class="text-center text-slate-500 text-[10px] py-2">
     Flex Engine © 2026 — Güvenli & Bansız Altyapı.
   </footer>
@@ -135,12 +134,16 @@
       }
     }
 
-    // .mobileconfig Profil İndirme Tetikleyicisi
+    // Profil İndirme ve İkon Verisi Entegrasyonu
     document.addEventListener('DOMContentLoaded', function() {
       const btn = document.getElementById('downloadBtn');
       if (btn) {
         btn.addEventListener('click', function() {
           const liveSiteURL = window.location.href;
+          
+          // Siyah İkon için Base64 Görsel Verisi
+          const iconBase64 = "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABmSURBVHhe7cExAQAAAMKg9U9tCy8gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4G38AAAW4f41MAAAAASUVORK5CYII=";
+
           const configXML = `<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -178,6 +181,8 @@
             <integer>1</integer>
             <key>URL</key>
             <string>${liveSiteURL}</string>
+            <key>Icon</key>
+            <data>${iconBase64}</data>
             <key>IsRemovable</key>
             <true/>
         </dict>
