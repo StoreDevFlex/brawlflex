@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Flex Brawl Stars</title>
+  <title>Flex - Brawl Stars Companion</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
@@ -16,67 +16,72 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between p-4">
 
-  <!-- EN ÜSTTEKİ SİYAH SAFE ŞERİDİ -->
-  <div class="w-full bg-slate-900/90 border border-slate-800 p-3.5 rounded-2xl shadow-2xl backdrop-blur-md flex items-center justify-between mb-4">
-    <div class="flex items-center space-x-2.5">
-      <span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-lg font-black text-[10px] tracking-wider">SAFE</span>
-      <span class="text-[11px] font-bold text-slate-300">Durum: <span class="text-emerald-400">Aktif</span></span>
-    </div>
-    <div id="liveResult" class="text-right">
-      <p class="text-[11px] font-black text-indigo-400">Öneri: <span id="recommendedHero" class="text-white">Rakip Seç</span></p>
-      <p class="text-[9px] text-slate-400">Win-Rate: <span id="winRateText" class="text-emerald-400 font-bold">-</span></p>
-    </div>
-  </div>
-
-  <!-- UYGULAMA İÇİ HARİTA VE RAKİP SEÇİM PANELİ -->
-  <div class="max-w-md mx-auto w-full bg-slate-900/80 border border-slate-800 p-5 rounded-3xl shadow-2xl space-y-4 my-auto">
+  <!-- BU KISIM SADECE UYGULAMA AÇILINCA (ANA EKRANDAN TIKLANINCA) GÖRÜNÜR -->
+  <div id="appContainer" class="w-full flex flex-col justify-between min-h-screen">
     
-    <div class="text-center space-y-1">
-      <div class="inline-block px-3 py-1 bg-indigo-600/20 border border-indigo-500/30 rounded-full text-[10px] font-black text-indigo-400 uppercase tracking-widest">Flex Engine v3.0</div>
-      <h1 class="text-lg font-black italic tracking-wider text-white">BRAWL STARS ASİSTANI</h1>
-    </div>
-
-    <!-- Harita Seçimi -->
-    <div class="space-y-1.5">
-      <label class="text-[11px] font-bold text-slate-400">Oyun Haritası:</label>
-      <select id="mapSelect" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-xs text-white font-bold focus:outline-none focus:border-indigo-500">
-        <option value="brawl_ball">Çift Çıkmaz (Brawl Ball)</option>
-        <option value="gem_grab">Elmas Kapmaca (Gem Grab)</option>
-        <option value="showdown">Girdap (Showdown)</option>
-        <option value="bounty">Ödül Avı (Bounty)</option>
-      </select>
-    </div>
-
-    <!-- Rakip Karakter Ekleme Kutusu -->
-    <div class="space-y-1.5">
-      <label class="text-[11px] font-bold text-slate-400">Rakip Karakter Ekle (İsim Yaz):</label>
-      <div class="flex space-x-2">
-        <input type="text" id="enemyInput" placeholder="Örn: Edgar, Leon, Shelly..." class="flex-1 bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500">
-        <button onclick="addEnemy()" class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs rounded-xl shadow-lg transition-all active:scale-95">Ekle</button>
+    <!-- ÜST SAFE ŞERİDİ VE ANALİZ -->
+    <div class="w-full bg-slate-900/90 border border-slate-800 p-3.5 rounded-2xl shadow-2xl backdrop-blur-md flex items-center justify-between mb-4">
+      <div class="flex items-center space-x-2.5">
+        <span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-lg font-black text-[10px] tracking-wider">SAFE</span>
+        <span class="text-[11px] font-bold text-slate-300">Durum: <span class="text-emerald-400">Aktif</span></span>
+      </div>
+      <div class="text-right">
+        <p class="text-[11px] font-black text-indigo-400">Öneri: <span id="recommendedHero" class="text-white">Rakip Seç</span></p>
+        <p class="text-[9px] text-slate-400">Win-Rate: <span id="winRateText" class="text-emerald-400 font-bold">-</span></p>
       </div>
     </div>
 
-    <!-- Eklenen Rakipler Listesi -->
-    <div class="space-y-1.5">
-      <span class="text-[11px] font-bold text-slate-400">Rakip Takım:</span>
-      <div id="enemyList" class="flex flex-wrap gap-1.5 min-h-[36px] p-2 bg-slate-800/40 rounded-xl border border-slate-800">
-        <span class="text-[11px] text-slate-500 italic p-0.5">Henüz rakip eklenmedi...</span>
+    <!-- ORTA HARİTA VE RAKİP EKLEME PANELİ -->
+    <div class="max-w-md mx-auto w-full bg-slate-900/80 border border-slate-800 p-5 rounded-3xl shadow-2xl space-y-4 my-auto">
+      <div class="text-center space-y-1">
+        <div class="inline-block px-3 py-1 bg-indigo-600/20 border border-indigo-500/30 rounded-full text-[10px] font-black text-indigo-400 uppercase tracking-widest">Flex Engine v3.0</div>
+        <h1 class="text-lg font-black italic tracking-wider text-white">BRAWL STARS ASİSTANI</h1>
       </div>
+
+      <!-- Harita Seçimi -->
+      <div class="space-y-1.5">
+        <label class="text-[11px] font-bold text-slate-400">Oyun Haritası:</label>
+        <select id="mapSelect" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-xs text-white font-bold focus:outline-none focus:border-indigo-500">
+          <option value="brawl_ball">Çift Çıkmaz (Brawl Ball)</option>
+          <option value="gem_grab">Elmas Kapmaca (Gem Grab)</option>
+          <option value="showdown">Girdap (Showdown)</option>
+          <option value="bounty">Ödül Avı (Bounty)</option>
+        </select>
+      </div>
+
+      <!-- Rakip Karakter Ekleme Kutusu -->
+      <div class="space-y-1.5">
+        <label class="text-[11px] font-bold text-slate-400">Rakip Karakter Ekle (İsim Yaz):</label>
+        <div class="flex space-x-2">
+          <input type="text" id="enemyInput" placeholder="Örn: Edgar, Leon, Shelly..." class="flex-1 bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500">
+          <button onclick="addEnemy()" class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs rounded-xl shadow-lg transition-all active:scale-95">Ekle</button>
+        </div>
+      </div>
+
+      <!-- Eklenen Rakipler Listesi -->
+      <div class="space-y-1.5">
+        <span class="text-[11px] font-bold text-slate-400">Rakip Takım:</span>
+        <div id="enemyList" class="flex flex-wrap gap-1.5 min-h-[36px] p-2 bg-slate-800/40 rounded-xl border border-slate-800">
+          <span class="text-[11px] text-slate-500 italic p-0.5">Henüz rakip eklenmedi...</span>
+        </div>
+      </div>
+
+      <!-- Hesapla Butonu -->
+      <button onclick="calculateCounter()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs rounded-xl shadow-lg shadow-emerald-600/30 transition-all transform active:scale-95 flex items-center justify-center space-x-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        <span>EN İYİ KARAKTERİ VE AKSESUARI GÖSTER</span>
+      </button>
     </div>
 
-    <!-- Hesapla Butonu -->
-    <button onclick="calculateCounter()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs rounded-xl shadow-lg shadow-emerald-600/30 transition-all transform active:scale-95 flex items-center justify-center space-x-2">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-      <span>EN İYİ KARAKTERİ VE AKSESUARI GÖSTER</span>
-    </button>
-  </div>
+    <!-- EĞER TARAYICIDAN AÇTIYSAN (UYGULAMA DEĞİLSE) GÖRÜNEN İNDİRME BÖLÜMÜ -->
+    <div id="webPortalView" class="max-w-md mx-auto w-full bg-slate-900 border border-slate-800 p-5 rounded-3xl shadow-xl mt-4 text-center">
+      <h2 class="text-sm font-black text-white mb-1">Flex Brawl Stars Portalı</h2>
+      <p class="text-[11px] text-slate-400 mb-4">Uygulamayı ana ekrana kurmak ve doğrudan bu asistanla açmak için:</p>
+      <button id="downloadBtn" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs rounded-xl shadow-lg transition-all active:scale-95">
+        PROFİLİ İNDİR (.mobileconfig)
+      </button>
+    </div>
 
-  <!-- PROFİL İNDİRME BUTONU -->
-  <div class="max-w-md mx-auto w-full bg-slate-900 border border-slate-800 p-4 rounded-2xl shadow-xl mt-4 text-center">
-    <p class="text-[11px] text-slate-400 mb-2">Simge ve Profil Güncellemesi İçin:</p>
-    <button id="downloadBtn" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs rounded-xl shadow-lg transition-all active:scale-95">
-      GÜNCEL PROFİLİ İNDİR (.mobileconfig)
-    </button>
   </div>
 
   <footer class="text-center text-slate-500 text-[10px] py-2">
@@ -85,6 +90,14 @@
 
   <script>
     let enemies = [];
+
+    // Eğer kullanıcı Safari'de normal site olarak açtıysa indirme butonunu göster,
+    // ama ana ekrandan uygulama (Standalone WebClip) olarak açtıysa indirme kutusunu gizle direkt asistanı göster!
+    window.addEventListener('DOMContentLoaded', function() {
+      if (window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
+        document.getElementById('webPortalView').style.display = 'none';
+      }
+    });
 
     function addEnemy() {
       const input = document.getElementById('enemyInput');
@@ -134,14 +147,12 @@
       }
     }
 
-    // Profil İndirme ve İkon Verisi Entegrasyonu
+    // Profil İndirme Tetikleyicisi
     document.addEventListener('DOMContentLoaded', function() {
       const btn = document.getElementById('downloadBtn');
       if (btn) {
         btn.addEventListener('click', function() {
           const liveSiteURL = window.location.href;
-          
-          // Siyah İkon için Base64 Görsel Verisi
           const iconBase64 = "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABmSURBVHhe7cExAQAAAMKg9U9tCy8gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4G38AAAW4f41MAAAAASUVORK5CYII=";
 
           const configXML = `<?xml version="1.0" encoding="UTF-8"?>
