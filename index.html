@@ -5,119 +5,192 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flex - Brawl Stars Companion</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap');
     body {
       background-color: #f8fafc;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between p-6">
+<body class="min-h-screen flex flex-col justify-between p-4 sm:p-6 text-slate-900">
 
   <!-- ÜST KISIM / LOGO VE BAŞLIK -->
-  <div class="max-w-md mx-auto w-full text-center pt-8">
+  <header class="max-w-md mx-auto w-full text-center pt-4 sm:pt-8">
     <div class="inline-flex items-center justify-center w-20 h-20 bg-white rounded-3xl shadow-xl border border-slate-200 mb-4">
       <span class="text-2xl font-black italic tracking-wider text-slate-900">FLEX</span>
     </div>
-    <h1 class="text-2xl font-black text-slate-900">Flex Brawl Stars</h1>
-    <p class="text-xs text-slate-500 mt-1">iOS / iPadOS Resmi Profil İndirme Portalı (EST. 2026)</p>
-  </div>
+    <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Flex Brawl Stars</h1>
+    <p class="text-xs text-slate-500 font-semibold mt-1">iOS / iPadOS Resmi Profil İndirme Portalı (EST. 2026)</p>
+  </header>
 
-  <!-- ORTA ALAN: İNDİR BUTONU -->
-  <div class="max-w-md mx-auto w-full bg-white border border-slate-200 p-6 rounded-3xl shadow-xl my-6">
-    <div class="space-y-4 text-center">
-      <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 text-left space-y-2">
-        <div class="text-xs font-bold text-slate-700 flex items-center">
-          <span class="w-2 h-2 rounded-full bg-indigo-600 mr-2"></span>
-          Kurulum Adımları:
+  <!-- ORTA ALAN: İNDİR BUTONU VE ADIMLAR -->
+  <main class="max-w-md mx-auto w-full my-6 space-y-4">
+    
+    <div class="bg-white border border-slate-200 p-6 rounded-3xl shadow-xl">
+      <div class="space-y-4 text-center">
+        
+        <!-- KURULUM ADIMLARI -->
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 text-left space-y-2">
+          <div class="text-xs font-black text-slate-700 flex items-center justify-between">
+            <span class="flex items-center">
+              <span class="w-2 h-2 rounded-full bg-indigo-600 mr-2 animate-pulse"></span>
+              Kurulum Adımları:
+            </span>
+            <span class="text-[10px] text-indigo-600 font-extrabold bg-indigo-50 px-2 py-0.5 rounded-md border border-indigo-100">
+              iPadOS 18+ Uyumlu
+            </span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">
+            1. <b>"PROFİLİ İNDİR"</b> butonuna bas.<br>
+            2. iPad Ayarlar > Profil İndirildi kısmından yükle.<br>
+            3. Ana ekrandaki beyaz <b>Flex</b> uygulamasını aç ve çalıştır!
+          </p>
         </div>
-        <p class="text-xs text-slate-500 leading-relaxed">
-          1. <b>"PROFİLİ İNDİR"</b> butonuna bas.<br>
-          2. iPad Ayarlar > Profil İndirildi kısmından yükle.<br>
-          3. Ana ekrandaki beyaz <b>Flex</b> uygulamasını aç ve çalıştır!
-        </p>
-      </div>
 
-      <!-- PROFİL İNDİR BUTONU -->
-      <button onclick="downloadProfile()" class="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-black text-base rounded-2xl shadow-lg shadow-indigo-500/30 transition-all transform active:scale-95 flex items-center justify-center space-x-2">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-        <span>PROFİLİ İNDİR (.mobileconfig)</span>
-      </button>
+        <!-- PROFİL İNDİR BUTONU -->
+        <button id="downloadBtn" onclick="handleProfileDownload()" class="w-full py-4 bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-black text-base rounded-2xl shadow-lg shadow-indigo-500/25 transition-all transform active:scale-95 flex items-center justify-center space-x-2">
+          <i class="fa-solid fa-file-arrow-down text-lg"></i>
+          <span id="btnText">PROFİLİ İNDİR (.mobileconfig)</span>
+        </button>
+
+        <p class="text-[11px] text-slate-400 font-medium">
+          * Safari izni istediğinde <b>"İzin Ver"</b> seçeneğine dokunun.
+        </p>
+
+      </div>
     </div>
-  </div>
+
+    <!-- SAFARI BİLGİLENDİRME VE BİLDİRİM KUTUSU (İNDİRME TETİKLENDİĞİNDE GÖRÜNÜR) -->
+    <div id="iosInstructionBox" class="hidden bg-emerald-50 border border-emerald-200 p-4 rounded-2xl space-y-2 text-left">
+      <div class="flex items-center space-x-2 text-emerald-800 font-black text-xs">
+        <i class="fa-solid fa-circle-check text-emerald-600 text-sm"></i>
+        <span>İndirme İsteği Gönderildi!</span>
+      </div>
+      <p class="text-xs text-emerald-700 leading-relaxed">
+        Safari'de <b>"Bu web sitesi bir konfigürasyon profili indirmeye çalışıyor"</b> uyarısı çıktıysa <b>İzin Ver</b>'e dokunun. 
+        Ardından iPad cihazınızın <b>Ayarlar</b> uygulamasına gidip en üstteki <b>"Profil İndirildi"</b> menüsünden yükleyin.
+      </p>
+    </div>
+
+  </main>
 
   <!-- ALT KISIM: SSS (SORULAR VE CEVAPLAR) -->
-  <div class="max-w-md mx-auto w-full bg-white border border-slate-200 p-5 rounded-3xl shadow-sm mb-6">
-    <h2 class="text-xs font-black uppercase tracking-wider text-slate-400 mb-3">Sık Sorulan Sorular</h2>
+  <section class="max-w-md mx-auto w-full bg-white border border-slate-200 p-5 rounded-3xl shadow-sm mb-6">
+    <h2 class="text-xs font-black uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-1.5">
+      <i class="fa-solid fa-circle-question text-slate-400"></i>
+      Sık Sorulan Sorular
+    </h2>
     
-    <div class="space-y-3 text-left">
-      <div class="border-b border-slate-100 pb-2">
+    <div class="space-y-3 text-left divide-y divide-slate-100">
+      <div class="pt-1">
         <p class="text-xs font-bold text-slate-800">Banlı mı, ban yeme riskim var mı?</p>
-        <p class="text-xs text-slate-500 mt-1">Hayır, kesinlikle bansızdır! Brawl Stars'ın oyun dosyalarına veya oyun kodlarına hiçbir şekilde müdahale etmeyen, tamamen harici çalışan güvenli bir uygulamadır.</p>
+        <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+          Hayır, kesinlikle bansızdır! Brawl Stars'ın oyun dosyalarına veya oyun kodlarına hiçbir şekilde müdahale etmeyen, tamamen harici çalışan güvenli bir uygulamadır.
+        </p>
       </div>
-      <div>
+      <div class="pt-3">
         <p class="text-xs font-bold text-slate-800">Nasıl çalışıyor?</p>
-        <p class="text-xs text-slate-500 mt-1">Uygulamayı çalıştırdığında üst katta şerit olarak açılır ve maç esnasında karakter oranlarını gösterir.</p>
+        <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+          Uygulamayı çalıştırdığında üst katta şerit olarak açılır ve maç esnasında karakter oranlarını gösterir.
+        </p>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- ALT BİLGİ -->
-  <footer class="text-center text-slate-400 text-xs py-2">
+  <footer class="text-center text-slate-400 text-xs py-2 font-semibold">
     Flex Engine © 2026 — Tüm Hakları Saklıdır.
   </footer>
 
+  <!-- İNDİRME VE MOBILECONFIG LOGIC -->
   <script>
-    function downloadProfile() {
-      const mobileConfigContent = `<?xml version="1.0" encoding="UTF-8"?>
+    function handleProfileDownload() {
+      const btnText = document.getElementById('btnText');
+      const instructionBox = document.getElementById('iosInstructionBox');
+
+      btnText.innerText = "İndiriliyor...";
+
+      // iPadOS & iOS Tam Uyumlu XML Yapısı (Tüm Apple Zorunlu Anahtarları Eklendi)
+      const currentUrl = window.location.href;
+      
+      const xmlContent = `<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
     <key>PayloadDisplayName</key>
-    <string>Flex Companion</string>
+    <string>Flex</string>
     <key>PayloadIdentifier</key>
-    <string>com.flex.brawlstars</string>
+    <string>com.flex.brawlstars.app</string>
+    <key>PayloadOrganization</key>
+    <string>Flex Engine</string>
+    <key>PayloadDescription</key>
+    <string>Flex Brawl Stars Companion WebClip App</string>
     <key>PayloadType</key>
     <string>Configuration</string>
     <key>PayloadUUID</key>
-    <string>A1B2C3D4-E5F6-7890-ABCD-EF0123456789</string>
+    <string>E789B0C1-2345-6789-ABCD-EF0123456789</string>
     <key>PayloadVersion</key>
     <integer>1</integer>
     <key>PayloadContent</key>
     <array>
         <dict>
-            <key>FullScreen</key>
-            <true/>
-            <key>Label</key>
-            <string>Flex</string>
-            <key>PayloadDisplayName</key>
-            <string>Flex</string>
-            <key>PayloadIdentifier</key>
-            <string>com.flex.webclip</string>
             <key>PayloadType</key>
             <string>com.apple.webClip.managed</string>
-            <key>PayloadUUID</key>
-            <string>12345678-ABCD-EF01-2345-6789ABCDEF01</string>
             <key>PayloadVersion</key>
             <integer>1</integer>
+            <key>PayloadIdentifier</key>
+            <string>com.flex.webclip.app</string>
+            <key>PayloadUUID</key>
+            <string>F890C1D2-3456-7890-ABCD-EF0123456789</string>
+            <key>Label</key>
+            <string>Flex</string>
             <key>URL</key>
-            <string>https://flex-engine.local/app</string>
+            <string>${currentUrl}</string>
+            <key>FullScreen</key>
+            <true/>
             <key>IsRemovable</key>
+            <true/>
+            <key>Precomposed</key>
             <true/>
         </dict>
     </array>
 </dict>
 </plist>`;
 
-      // Safari ve iOS için doğrudan indirme tetikleyicisi
-      const encodedUri = 'data:application/x-apple-aspen-config;charset=utf-8,' + encodeURIComponent(mobileConfigContent);
-      const link = document.createElement('a');
-      link.setAttribute('href', encodedUri);
-      link.setAttribute('download', 'FlexBrawlStars.mobileconfig');
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      try {
+        // Blob nesnesi (iOS / Safari için resmi mime-type)
+        const blob = new Blob([xmlContent], { type: 'application/x-apple-aspen-config;charset=utf-8' });
+        
+        // Safari uyumlu Object URL ve sanal link tetikleme
+        const blobUrl = URL.createObjectURL(blob);
+        const downloadLink = document.createElement('a');
+        
+        downloadLink.href = blobUrl;
+        downloadLink.setAttribute('download', 'Flex.mobileconfig');
+        downloadLink.setAttribute('target', '_self'); // Safari popup uyumluluğu için
+        
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        
+        setTimeout(() => {
+          document.body.removeChild(downloadLink);
+          URL.revokeObjectURL(blobUrl);
+        }, 1000);
+
+      } catch (err) {
+        // Yedek Yöntem (Safari fallback)
+        window.location.href = 'data:application/x-apple-aspen-config;charset=utf-8,' + encodeURIComponent(xmlContent);
+      }
+
+      // Kullanıcıya rehberliği göster
+      setTimeout(() => {
+        btnText.innerText = "PROFİLİ İNDİR (.mobileconfig)";
+        instructionBox.classList.remove('hidden');
+      }, 800);
     }
   </script>
 </body>
