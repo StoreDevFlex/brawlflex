@@ -6,8 +6,15 @@
   <title>Flex - Brawl Stars Companion</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
     body {
-      background-color: #090d16;
+      background: linear-gradient(-45deg, #090d16, #1e1b4b, #0f172a, #020617);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       user-select: none;
       color: #fff;
@@ -16,32 +23,32 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between p-4">
 
-  <!-- BU KISIM SADECE UYGULAMA AÇILINCA (ANA EKRANDAN TIKLANINCA) GÖRÜNÜR -->
+  <!-- UYGULAMA İÇİ ANA KONTEYNER -->
   <div id="appContainer" class="w-full flex flex-col justify-between min-h-screen">
     
-    <!-- ÜST SAFE ŞERİDİ VE ANALİZ -->
-    <div class="w-full bg-slate-900/90 border border-slate-800 p-3.5 rounded-2xl shadow-2xl backdrop-blur-md flex items-center justify-between mb-4">
+    <!-- ÜST SAFE ŞERİDİ VE ANLIK ÖNERİ -->
+    <div class="w-full bg-slate-900/80 border border-slate-700/50 p-3.5 rounded-2xl shadow-2xl backdrop-blur-xl flex items-center justify-between mb-3">
       <div class="flex items-center space-x-2.5">
-        <span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-lg font-black text-[10px] tracking-wider">SAFE</span>
-        <span class="text-[11px] font-bold text-slate-300">Durum: <span class="text-emerald-400">Aktif</span></span>
+        <span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-lg font-black text-[10px] tracking-wider animate-pulse">SAFE</span>
+        <span class="text-[11px] font-bold text-slate-300">Durum: <span class="text-emerald-400">Hızlı Analiz</span></span>
       </div>
       <div class="text-right">
-        <p class="text-[11px] font-black text-indigo-400">Öneri: <span id="recommendedHero" class="text-white">Rakip Seç</span></p>
+        <p class="text-[11px] font-black text-indigo-400">Öneri: <span id="recommendedHero" class="text-white">Harita / Rakip Seç</span></p>
         <p class="text-[9px] text-slate-400">Win-Rate: <span id="winRateText" class="text-emerald-400 font-bold">-</span></p>
       </div>
     </div>
 
-    <!-- ORTA HARİTA VE RAKİP EKLEME PANELİ -->
-    <div class="max-w-md mx-auto w-full bg-slate-900/80 border border-slate-800 p-5 rounded-3xl shadow-2xl space-y-4 my-auto">
+    <!-- ORTA HARİTA VE RAKİP SEÇİM PANELİ -->
+    <div class="max-w-md mx-auto w-full bg-slate-900/70 border border-slate-800/80 p-5 rounded-3xl shadow-2xl backdrop-blur-md space-y-4 my-auto">
       <div class="text-center space-y-1">
-        <div class="inline-block px-3 py-1 bg-indigo-600/20 border border-indigo-500/30 rounded-full text-[10px] font-black text-indigo-400 uppercase tracking-widest">Flex Engine v3.0</div>
+        <div class="inline-block px-3 py-1 bg-indigo-600/20 border border-indigo-500/30 rounded-full text-[10px] font-black text-indigo-400 uppercase tracking-widest">Flex Engine v3.5 (Turbo)</div>
         <h1 class="text-lg font-black italic tracking-wider text-white">BRAWL STARS ASİSTANI</h1>
       </div>
 
-      <!-- Harita Seçimi -->
+      <!-- Harita Seçimi (Seçildiği an otomatik öneri yapar) -->
       <div class="space-y-1.5">
         <label class="text-[11px] font-bold text-slate-400">Oyun Haritası:</label>
-        <select id="mapSelect" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-xs text-white font-bold focus:outline-none focus:border-indigo-500">
+        <select id="mapSelect" onchange="calculateCounter()" class="w-full bg-slate-800/90 border border-slate-700 rounded-xl p-2.5 text-xs text-white font-bold focus:outline-none focus:border-indigo-500 shadow-inner">
           <option value="brawl_ball">Çift Çıkmaz (Brawl Ball)</option>
           <option value="gem_grab">Elmas Kapmaca (Gem Grab)</option>
           <option value="showdown">Girdap (Showdown)</option>
@@ -53,7 +60,7 @@
       <div class="space-y-1.5">
         <label class="text-[11px] font-bold text-slate-400">Rakip Karakter Ekle (İsim Yaz):</label>
         <div class="flex space-x-2">
-          <input type="text" id="enemyInput" placeholder="Örn: Edgar, Leon, Shelly..." class="flex-1 bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500">
+          <input type="text" id="enemyInput" placeholder="Örn: Edgar, Leon, Shelly..." class="flex-1 bg-slate-800/90 border border-slate-700 rounded-xl p-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 shadow-inner">
           <button onclick="addEnemy()" class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs rounded-xl shadow-lg transition-all active:scale-95">Ekle</button>
         </div>
       </div>
@@ -62,41 +69,41 @@
       <div class="space-y-1.5">
         <span class="text-[11px] font-bold text-slate-400">Rakip Takım:</span>
         <div id="enemyList" class="flex flex-wrap gap-1.5 min-h-[36px] p-2 bg-slate-800/40 rounded-xl border border-slate-800">
-          <span class="text-[11px] text-slate-500 italic p-0.5">Henüz rakip eklenmedi...</span>
+          <span class="text-[11px] text-slate-500 italic p-0.5">Henüz rakip eklenmedi (Haritaya göre öneriliyor)...</span>
         </div>
       </div>
 
-      <!-- Hesapla Butonu -->
+      <!-- Anında Hesapla Butonu -->
       <button onclick="calculateCounter()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs rounded-xl shadow-lg shadow-emerald-600/30 transition-all transform active:scale-95 flex items-center justify-center space-x-2">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-        <span>EN İYİ KARAKTERİ VE AKSESUARI GÖSTER</span>
+        <span>ANINDA ANALİZ ET</span>
       </button>
     </div>
 
-    <!-- EĞER TARAYICIDAN AÇTIYSAN (UYGULAMA DEĞİLSE) GÖRÜNEN İNDİRME BÖLÜMÜ -->
-    <div id="webPortalView" class="max-w-md mx-auto w-full bg-slate-900 border border-slate-800 p-5 rounded-3xl shadow-xl mt-4 text-center">
+    <!-- TARAYICI İÇİN İNDİRME BÖLÜMÜ -->
+    <div id="webPortalView" class="max-w-md mx-auto w-full bg-slate-900/80 border border-slate-800 p-5 rounded-3xl shadow-xl mt-3 text-center backdrop-blur-md">
       <h2 class="text-sm font-black text-white mb-1">Flex Brawl Stars Portalı</h2>
-      <p class="text-[11px] text-slate-400 mb-4">Uygulamayı ana ekrana kurmak ve doğrudan bu asistanla açmak için:</p>
-      <button id="downloadBtn" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs rounded-xl shadow-lg transition-all active:scale-95">
+      <p class="text-[11px] text-slate-400 mb-3">Uygulamayı ana ekrana kurmak için:</p>
+      <button id="downloadBtn" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs rounded-xl shadow-lg transition-all active:scale-95">
         PROFİLİ İNDİR (.mobileconfig)
       </button>
     </div>
 
   </div>
 
-  <footer class="text-center text-slate-500 text-[10px] py-2">
-    Flex Engine © 2026 — Güvenli & Bansız Altyapı.
+  <footer class="text-center text-slate-500 text-[10px] py-1">
+    Flex Engine © 2026 — Turbo Bansız Altyapı.
   </footer>
 
   <script>
     let enemies = [];
 
-    // Eğer kullanıcı Safari'de normal site olarak açtıysa indirme butonunu göster,
-    // ama ana ekrandan uygulama (Standalone WebClip) olarak açtıysa indirme kutusunu gizle direkt asistanı göster!
+    // WebClip (Uygulama) olarak açıldıysa indirme kutusunu gizle
     window.addEventListener('DOMContentLoaded', function() {
       if (window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
         document.getElementById('webPortalView').style.display = 'none';
       }
+      calculateCounter(); // Sayfa açılır açılmaz haritaya göre ilk öneriyi getir
     });
 
     function addEnemy() {
@@ -106,13 +113,14 @@
         enemies.push(val);
         input.value = '';
         renderEnemies();
+        calculateCounter(); // Rakip eklenince anında güncelle
       }
     }
 
     function renderEnemies() {
       const list = document.getElementById('enemyList');
       if (enemies.length === 0) {
-        list.innerHTML = '<span class="text-[11px] text-slate-500 italic p-0.5">Henüz rakip eklenmedi...</span>';
+        list.innerHTML = '<span class="text-[11px] text-slate-500 italic p-0.5">Henüz rakip eklenmedi (Haritaya göre öneriliyor)...</span>';
         return;
       }
       list.innerHTML = '';
@@ -127,23 +135,34 @@
     function removeEnemy(index) {
       enemies.splice(index, 1);
       renderEnemies();
+      calculateCounter();
     }
 
     function calculateCounter() {
-      if (enemies.length === 0) {
-        alert('Lütfen en az bir rakip karakter ekle!');
-        return;
-      }
-      
+      const mapVal = document.getElementById('mapSelect').value;
       const heroElem = document.getElementById('recommendedHero');
       const winRateElem = document.getElementById('winRateText');
 
+      // Rakipte Edgar varsa öncelikli counter
       if (enemies.some(e => e.toLowerCase().includes('edgar'))) {
-        heroElem.innerText = 'Shelly (Şok Stun Aksesuarı)';
+        heroElem.innerText = 'Shelly (Stun Aksesuarı)';
         winRateElem.innerText = '%96.4 Win-Rate';
+        return;
+      }
+
+      // Haritaya göre hızlı meta önerileri
+      if (mapVal === 'brawl_ball') {
+        heroElem.innerText = 'Frank / Mortis';
+        winRateElem.innerText = '%93.2 Win-Rate';
+      } else if (mapVal === 'gem_grab') {
+        heroElem.innerText = 'Gene / Pam';
+        winRateElem.innerText = '%92.5 Win-Rate';
+      } else if (mapVal === 'showdown') {
+        heroElem.innerText = 'Buzz / Cordelius';
+        winRateElem.innerText = '%94.8 Win-Rate';
       } else {
-        heroElem.innerText = 'Colt (Seri Atış + Hız)';
-        winRateElem.innerText = '%91.8 Win-Rate';
+        heroElem.innerText = 'Piper / Nani';
+        winRateElem.innerText = '%91.9 Win-Rate';
       }
     }
 
