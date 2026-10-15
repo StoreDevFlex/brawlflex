@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flex - Brawl Stars Companion</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #f8fafc;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      user-select: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between p-6">
+
+  <!-- ÜST KISIM / LOGO VE BAŞLIK -->
+  <div class="max-w-md mx-auto w-full text-center pt-8">
+    <div class="inline-flex items-center justify-center w-20 h-20 bg-white rounded-3xl shadow-xl border border-slate-200 mb-4">
+      <span class="text-2xl font-black italic tracking-wider text-slate-900">FLEX</span>
+    </div>
+    <h1 class="text-2xl font-black text-slate-900">Flex Brawl Stars</h1>
+    <p class="text-xs text-slate-500 mt-1">iOS / iPadOS Resmi Profil İndirme Portalı (EST. 2026)</p>
+  </div>
+
+  <!-- ORTA ALAN: İNDİR BUTONU -->
+  <div class="max-w-md mx-auto w-full bg-white border border-slate-200 p-6 rounded-3xl shadow-xl my-6">
+    <div class="space-y-4 text-center">
+      <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 text-left space-y-2">
+        <div class="text-xs font-bold text-slate-700 flex items-center">
+          <span class="w-2 h-2 rounded-full bg-indigo-600 mr-2"></span>
+          Kurulum Adımları:
+        </div>
+        <p class="text-xs text-slate-500 leading-relaxed">
+          1. <b>"PROFİLİ İNDİR"</b> butonuna bas.<br>
+          2. iPad Ayarlar > Profil İndirildi kısmından yükle.<br>
+          3. Ana ekrandaki beyaz <b>Flex</b> uygulamasını aç ve çalıştır!
+        </p>
+      </div>
+
+      <!-- PROFİL İNDİR BUTONU -->
+      <button onclick="downloadProfile()" class="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-black text-base rounded-2xl shadow-lg shadow-indigo-500/30 transition-all transform active:scale-95 flex items-center justify-center space-x-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        <span>PROFİLİ İNDİR (.mobileconfig)</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ALT KISIM: SSS (SORULAR VE CEVAPLAR) -->
+  <div class="max-w-md mx-auto w-full bg-white border border-slate-200 p-5 rounded-3xl shadow-sm mb-6">
+    <h2 class="text-xs font-black uppercase tracking-wider text-slate-400 mb-3">Sık Sorulan Sorular</h2>
+    
+    <div class="space-y-3 text-left">
+      <div class="border-b border-slate-100 pb-2">
+        <p class="text-xs font-bold text-slate-800">Banlı mı, ban yeme riskim var mı?</p>
+        <p class="text-xs text-slate-500 mt-1">Hayır, kesinlikle bansızdır! Brawl Stars'ın oyun dosyalarına veya oyun kodlarına hiçbir şekilde müdahale etmeyen, tamamen harici çalışan güvenli bir uygulamadır.</p>
+      </div>
+      <div>
+        <p class="text-xs font-bold text-slate-800">Nasıl çalışıyor?</p>
+        <p class="text-xs text-slate-500 mt-1">Uygulamayı çalıştırdığında üst katta şerit olarak açılır ve maç esnasında karakter oranlarını gösterir.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALT BİLGİ -->
+  <footer class="text-center text-slate-400 text-xs py-2">
+    Flex Engine © 2026 — Tüm Hakları Saklıdır.
+  </footer>
+
+  <script>
+    function downloadProfile() {
+      // Düzeltilmiş ve hatasız iOS .mobileconfig profili (Label dahil)
+      const mobileConfigContent = `<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>PayloadDisplayName</key>
+    <string>Flex Companion</string>
+    <key>PayloadIdentifier</key>
+    <string>com.flex.brawlstars</string>
+    <key>PayloadType</key>
+    <string>Configuration</string>
+    <key>PayloadUUID</key>
+    <string>A1B2C3D4-E5F6-7890-ABCD-EF0123456789</string>
+    <key>PayloadVersion</key>
+    <integer>1</integer>
+    <key>PayloadContent</key>
+    <array>
+        <dict>
+            <key>FullScreen</key>
+            <true/>
+            <key>Label</key>
+            <string>Flex</string>
+            <key>PayloadDisplayName</key>
+            <string>Flex</string>
+            <key>PayloadIdentifier</key>
+            <string>com.flex.webclip</string>
+            <key>PayloadType</key>
+            <string>com.apple.webClip.
