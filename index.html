@@ -39,11 +39,13 @@
         </p>
       </div>
 
-      <!-- PROFİL İNDİR BUTONU -->
-      <button onclick="downloadProfile()" class="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-black text-base rounded-2xl shadow-lg shadow-indigo-500/30 transition-all transform active:scale-95 flex items-center justify-center space-x-2">
+      <!-- JAVASCRIPT YOK, DOĞRUDAN SAFARI UYUMLU BAĞLANTI (DATA URI) -->
+      <a href="data:application/x-apple-aspen-config;charset=utf-8,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0A%3C%2FDOCTYPE%20plist%20PUBLIC%20%22-%2F%2FApple%2F%2FDTD%20PLIST%201.0%2F%2FEN%22%20%22http%3A%2F%2Fwww.apple.com%2FDTDs%2FPropertyList-1.0.dtd%22%3E%0A%3Cplist%20version%3D%221.0%22%3E%0A%3CDICT%3E%0A%20%20%20%20%3Ckey%3EPayloadDisplayName%3C%2Fkey%3E%0A%20%20%20%20%3Cstring%3EFlex%20Companion%3C%2Fstring%3E%0A%20%20%20%20%3Ckey%3EPayloadIdentifier%3C%2Fkey%3E%0A%20%20%20%20%3Cstring%3Ecom.flex.brawlstars%3C%2Fstring%3E%0A%20%20%20%20%3Ckey%3EPayloadType%3C%2Fkey%3E%0A%20%20%20%20%3Cstring%3EConfiguration%3C%2Fstring%3E%0A%20%20%20%20%3Ckey%3EPayloadUUID%3C%2Fkey%3E%0A%20%20%20%20%3Cstring%3EA1B2C3D4-E5F6-7890-ABCD-EF0123456789%3C%2Fstring%3E%0A%20%20%20%20%3Ckey%3EPayloadVersion%3C%2Fkey%3E%0A%20%20%20%20%3Cinteger%3E1%3C%2Finteger%3E%0A%20%20%20%20%3Ckey%3EPayloadContent%3C%2Fkey%3E%0A%20%20%20%20%3Carray%3E%0A%20%20%20%20%20%20%20%20%3CDICT%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ckey%3EFullScreen%3C%2Fkey%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ctrue%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ckey%3ELabel%3C%2Fkey%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cstring%3EFlex%3C%2Fstring%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ckey%3EPayloadDisplayName%3C%2Fkey%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cstring%3EFlex%3C%2Fstring%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ckey%3EPayloadIdentifier%3C%2Fkey%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cstring%3Ecom.flex.webclip%3C%2Fstring%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ckey%3EPayloadType%3C%2Fkey%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cstring%3Ecom.apple.webClip.managed%3C%2Fstring%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ckey%3EPayloadUUID%3C%2Fkey%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cstring%3E12345678-ABCD-EF01-2345-6789ABCDEF01%3C%2Fstring%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ckey%3EPayloadVersion%3C%2Fkey%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cinteger%3E1%3C%2Finteger%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ckey%3EURL%3C%2Fkey%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cstring%3Ehttps%3A%2F%2Fflex-engine.local%2Fapp%3C%2Fstring%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ckey%3EIsRemovable%3C%2Fkey%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ctrue%2F%3E%0A%20%20%20%20%20%20%20%20%3C%2Fdict%3E%0A%20%20%20%20%3C%2Farray%3E%0A%3C%2Fdict%3E%0A%3C%2Fplist%3E" 
+         download="FlexBrawlStars.mobileconfig" 
+         class="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-black text-base rounded-2xl shadow-lg shadow-indigo-500/30 transition-all transform active:scale-95 flex items-center justify-center space-x-2">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
         <span>PROFİLİ İNDİR (.mobileconfig)</span>
-      </button>
+      </a>
     </div>
   </div>
 
@@ -68,32 +70,5 @@
     Flex Engine © 2026 — Tüm Hakları Saklıdır.
   </footer>
 
-  <script>
-    function downloadProfile() {
-      const mobileConfigContent = `<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>PayloadDisplayName</key>
-    <string>Flex Companion</string>
-    <key>PayloadIdentifier</key>
-    <string>com.flex.brawlstars</string>
-    <key>PayloadType</key>
-    <string>Configuration</string>
-    <key>PayloadUUID</key>
-    <string>A1B2C3D4-E5F6-7890-ABCD-EF0123456789</string>
-    <key>PayloadVersion</key>
-    <integer>1</integer>
-    <key>PayloadContent</key>
-    <array>
-        <dict>
-            <key>FullScreen</key>
-            <true/>
-            <key>Label</key>
-            <string>Flex</string>
-            <key>PayloadDisplayName</key>
-            <string>Flex</string>
-            <key>PayloadIdentifier</key>
-            <string>com.flex.webclip</string>
-            <key>PayloadType</key>
-            <string>com.apple.webClip.
+</body>
+</html>
