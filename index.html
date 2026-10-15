@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Flex Brawl Stars Asistanı</title>
+  <title>Flex - Brawl Stars Companion</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
@@ -11,14 +11,13 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       user-select: none;
       color: #fff;
-      overflow-x: hidden;
     }
   </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between p-4">
 
-  <!-- ÜST KISIM: SAFE ŞERİDİ VE CANLI ANALİZ -->
-  <div class="w-full bg-slate-900/90 border border-slate-800 p-3.5 rounded-2xl shadow-2xl backdrop-blur-md flex items-center justify-between">
+  <!-- 1. BÖLÜM: ÜST SAFE ŞERİDİ (Uygulama açılınca en üstte direkt görünür) -->
+  <div class="w-full bg-slate-900/90 border border-slate-800 p-3.5 rounded-2xl shadow-2xl backdrop-blur-md flex items-center justify-between mb-4">
     <div class="flex items-center space-x-2.5">
       <span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-lg font-black text-[10px] tracking-wider">SAFE</span>
       <span class="text-[11px] font-bold text-slate-300">Durum: <span class="text-emerald-400">Aktif</span></span>
@@ -29,7 +28,7 @@
     </div>
   </div>
 
-  <!-- ORTA ALAN: OYUN İÇİ HARİTA VE RAKİP GİRİŞ PANELİ -->
+  <!-- 2. BÖLÜM: ORTA KISIM (Harita ve Rakip Yazma Paneli) -->
   <div class="max-w-md mx-auto w-full bg-slate-900/80 border border-slate-800 p-5 rounded-3xl shadow-2xl space-y-4 my-auto">
     
     <div class="text-center space-y-1">
@@ -69,6 +68,14 @@
     <button onclick="calculateCounter()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs rounded-xl shadow-lg shadow-emerald-600/30 transition-all transform active:scale-95 flex items-center justify-center space-x-2">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
       <span>EN İYİ KARAKTERİ VE AKSESUARI GÖSTER</span>
+    </button>
+  </div>
+
+  <!-- 3. BÖLÜM: PROFİL İNDİR BUTONU (Sitede görünür) -->
+  <div class="max-w-md mx-auto w-full bg-slate-900 border border-slate-800 p-4 rounded-2xl shadow-xl mt-4 text-center">
+    <p class="text-[11px] text-slate-400 mb-2">Uygulamayı ana ekrana sabitlemek için:</p>
+    <button id="downloadBtn" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs rounded-xl shadow-lg transition-all active:scale-95">
+      PROFİLİ İNDİR (.mobileconfig)
     </button>
   </div>
 
@@ -127,6 +134,71 @@
         winRateElem.innerText = '%91.8 Win-Rate';
       }
     }
+
+    // .mobileconfig Profil İndirme Tetikleyicisi
+    document.addEventListener('DOMContentLoaded', function() {
+      const btn = document.getElementById('downloadBtn');
+      if (btn) {
+        btn.addEventListener('click', function() {
+          const liveSiteURL = window.location.href;
+          const configXML = `<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>PayloadDisplayName</key>
+    <string>Flex Brawl Stars Companion</string>
+    <key>PayloadIdentifier</key>
+    <string>com.flex.brawlstars</string>
+    <key>PayloadOrganization</key>
+    <string>Flex Engine</string>
+    <key>PayloadDescription</key>
+    <string>Flex Brawl Stars Live Companion App</string>
+    <key>PayloadType</key>
+    <string>Configuration</string>
+    <key>PayloadUUID</key>
+    <string>A1B2C3D4-E5F6-7890-ABCD-EF0123456789</string>
+    <key>PayloadVersion</key>
+    <integer>1</integer>
+    <key>PayloadContent</key>
+    <array>
+        <dict>
+            <key>FullScreen</key>
+            <true/>
+            <key>Label</key>
+            <string>Flex Brawl Stars</string>
+            <key>PayloadDisplayName</key>
+            <string>Flex Brawl Stars</string>
+            <key>PayloadIdentifier</key>
+            <string>com.flex.brawlstars.webclip</string>
+            <key>PayloadType</key>
+            <string>com.apple.webClip.managed</string>
+            <key>PayloadUUID</key>
+            <string>12345678-ABCD-EF01-2345-6789ABCDEF01</string>
+            <key>PayloadVersion</key>
+            <integer>1</integer>
+            <key>URL</key>
+            <string>${liveSiteURL}</string>
+            <key>IsRemovable</key>
+            <true/>
+        </dict>
+    </array>
+</dict>
+</plist>`;
+
+          const blob = new Blob([configXML], { type: 'application/x-apple-aspen-config;charset=utf-8' });
+          const blobUrl = URL.createObjectURL(blob);
+          const downloadLink = document.createElement('a');
+          downloadLink.href = blobUrl;
+          downloadLink.setAttribute('download', 'FlexBrawlStars.mobileconfig');
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+          setTimeout(() => {
+            document.body.removeChild(downloadLink);
+            window.URL.revokeObjectURL(blobUrl);
+          }, 100);
+        });
+      }
+    });
   </script>
 </body>
 </html>
