@@ -70,7 +70,6 @@
 
   <script>
     function downloadProfile() {
-      // Düzeltilmiş ve hatasız iOS .mobileconfig profili (Label dahil)
       const mobileConfigContent = `<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -97,4 +96,29 @@
             <key>PayloadIdentifier</key>
             <string>com.flex.webclip</string>
             <key>PayloadType</key>
-            <string>com.apple.webClip.
+            <string>com.apple.webClip.managed</string>
+            <key>PayloadUUID</key>
+            <string>12345678-ABCD-EF01-2345-6789ABCDEF01</string>
+            <key>PayloadVersion</key>
+            <integer>1</integer>
+            <key>URL</key>
+            <string>https://flex-engine.local/app</string>
+            <key>IsRemovable</key>
+            <true/>
+        </dict>
+    </array>
+</dict>
+</plist>`;
+
+      // Safari ve iOS için doğrudan indirme tetikleyicisi
+      const encodedUri = 'data:application/x-apple-aspen-config;charset=utf-8,' + encodeURIComponent(mobileConfigContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', 'FlexBrawlStars.mobileconfig');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+</body>
+</html>
